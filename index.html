@@ -118,4 +118,33 @@
    </ul>
     </div>
 </body>
+<script>
+    let addtodo=document.querySelector("#addtodo");
+    let tododata=document.querySelector("#todoInput")
+    let todolist=document.querySelector("todo-list")
+    addtodo.addEventListener("click",function(event){
+        if (tododata.value!=="")
+        {
+        event.preventDefault();
+         let newitem=document.createElement("div")
+         newitem.classList.add("item");
+         let item=document.createElement("li")
+         item.innerText=tododata.value;
+         let completebtn=document.createElement("button");
+         completebtn.classList.add("complete")
+         completebtn.innerHTML='<i class="fa fa-check"></i>'
+         newitem.appendChild(item)
+         newitem.appendChild(completebtn)
+         let deletebtn=document.createElement("button");
+         deletebtn.classList.add("delete")
+         deletebtn.innerHTML='<i class="fa fa-trash"></i>'
+         newitem.appendChild(deletebtn)
+         document.getElementById("todo-list").appendChild(newitem)
+         tododata.value=""
+        }
+        else{
+            event.preventDefault();
+        }  
+    })
+    </script>
 </html>
