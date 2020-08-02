@@ -146,5 +146,22 @@
             event.preventDefault();
         }  
     })
+    let todolistitem=document.getElementById("todo-list")
+    todolistitem.addEventListener("click",(e)=>{
+        let edit=e.target;
+        
+        if (edit.classList[0]=="complete")
+        {
+            let todos=edit.parentNode;
+            todos.classList.toggle("completed");
+            console.log("completed item")
+        }
+        else{
+            console.log("Deleting item")
+            let todos=edit.parentNode;
+            todos.remove()
+        }
+        
+    })
     </script>
 </html>
