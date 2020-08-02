@@ -122,6 +122,70 @@
     let addtodo=document.querySelector("#addtodo");
     let tododata=document.querySelector("#todoInput")
     let todolist=document.querySelector("todo-list")
+    window.onload=addll()
+        function localtodo(todo)
+    {
+        let todos;
+        if (localStorage.getItem("todos")===null)
+        { console.log("working")
+            todos=[]
+        }
+        else
+        { 
+            todos=JSON.parse(localStorage.getItem("todos"))
+        }
+
+        todos.push(todo)
+        localStorage.setItem('todos',JSON.stringify(todos))
+    }
+    function addll(){
+          let todos;
+        if (localStorage.getItem("todos")===null)
+        { console.log("working")
+            todos=[]
+        }
+        else
+        { 
+            todos=JSON.parse(localStorage.getItem("todos"))
+        }
+        todos.forEach(function(todo){
+        let newitem=document.createElement("div")
+         newitem.classList.add("item");
+         let item=document.createElement("li")
+         item.innerText=todo;
+         let completebtn=document.createElement("button");
+         completebtn.classList.add("complete")
+         completebtn.innerHTML='<i class="fa fa-check"></i>'
+         newitem.appendChild(item)
+         newitem.appendChild(completebtn)
+         let deletebtn=document.createElement("button");
+         deletebtn.classList.add("delete")
+         deletebtn.innerHTML='<i class="fa fa-trash"></i>'
+         newitem.appendChild(deletebtn)
+         document.getElementById("todo-list").appendChild(newitem)
+
+        })
+
+    }
+    function deletelocaly(todo)
+    { 
+        let todos;
+        if (localStorage.getItem("todos")===null)
+        { console.log("working")
+            todos=[]
+        }
+        else
+        { 
+            todos=JSON.parse(localStorage.getItem("todos"))
+        }
+        let deletion=todo.children[0].innerText
+        
+        console.log(todos.indexOf(deletion))
+        todos.splice(todos.indexOf(deletion),1)
+        localStorage.setItem("todos",JSON.stringify(todos))
+        
+    }
+
     addtodo.addEventListener("click",function(event){
         if (tododata.value!=="")
         {
@@ -140,6 +204,7 @@
          deletebtn.innerHTML='<i class="fa fa-trash"></i>'
          newitem.appendChild(deletebtn)
          document.getElementById("todo-list").appendChild(newitem)
+         localtodo(tododata.value)
          tododata.value=""
         }
         else{
@@ -159,9 +224,11 @@
         else{
             console.log("Deleting item")
             let todos=edit.parentNode;
+            deletelocaly(todos)
             todos.remove()
         }
         
     })
+
     </script>
 </html>
